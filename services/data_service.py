@@ -173,8 +173,14 @@ def create_record_for_new_resume_id_in_resume_records(bot_user_id: str, vacancy_
             "email": "",
             "ai_analysis": {},
             "resume_sorting_status": "new",
-            "is_request_to_shoot_resume_video_sent": "no",
-            "is_resume_video_received": "no",
+            "request_to_shoot_resume_video_sent": "no",
+            "applicant_bot_visited": "no", # updated from applicant bot
+            "data_from_telegram": {},  # updated from applicant bot
+            "privacy_policy_confirmed": "no",  # updated from applicant bot
+            "privacy_policy_confirmation_time": "",  # updated from applicant bot
+            "welcome_video_shown": "no",  # updated from applicant bot
+            "agreed_to_record_resume_video": "no",  # updated from applicant bot
+            "resume_video_received": "no",
             "resume_video_path": "",
             "is_resume_accepted_by_manager": "no"
         }
@@ -431,7 +437,7 @@ def get_list_of_passed_resume_ids_with_video(bot_user_id: str, vacancy_id: str) 
         # Check if resume is passed and not recommended yet without video
         if resume_record_data["resume_sorting_status"] == "passed":
             # Collect resume id for passed resumes WITH video
-            if resume_record_data["is_resume_video_received"] == "yes":
+            if resume_record_data["resume_video_received"] == "yes":
                 list_of_passed_resume_ids_with_video.append(resume_id)
     return list_of_passed_resume_ids_with_video
 
@@ -448,7 +454,7 @@ def get_list_of_passed_resume_ids_no_video(bot_user_id: str, vacancy_id: str) ->
         # Check if resume is passed and not recommended yet without video
         if resume_record_data["resume_sorting_status"] == "passed":
             # Collect resume id for passed resumes WITH video
-            if resume_record_data["is_resume_video_received"] == "no":
+            if resume_record_data["resume_video_received"] == "no":
                 list_of_passed_resume_ids_no_video.append(resume_record_id)
     return list_of_passed_resume_ids_no_video
 

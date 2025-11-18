@@ -43,7 +43,7 @@ from services.status_validation_service import (
     is_negotiations_collection_file_exists,
     is_resume_records_file_exists,
     is_resume_records_file_not_empty,
-    is_privacy_policy_confirmed,
+    is_manager_privacy_policy_confirmed,
     is_applicant_video_recorded,
 )
 
@@ -533,7 +533,7 @@ async def ask_privacy_policy_confirmation_command(update: Update, context: Conte
 
     # ----- CHECK IF PRIVACY POLICY is already confirmed and STOP if it is -----
 
-    if is_privacy_policy_confirmed(bot_user_id=bot_user_id):
+    if is_manager_privacy_policy_confirmed(bot_user_id=bot_user_id):
         await send_message_to_user(update, context, text=SUCCESS_TO_GET_PRIVACY_POLICY_CONFIRMATION_TEXT)
         return
 
@@ -633,7 +633,7 @@ async def hh_authorization_command(update: Update, context: ContextTypes.DEFAULT
     bot_user_id = str(get_tg_user_data_attribute_from_update_object(update=update, tg_user_attribute="id"))
     
     # ----- CHECK IF NO Privacy policy consent or AUTHORIZAED already and STOP if it is -----
-    if not is_privacy_policy_confirmed(bot_user_id=bot_user_id):
+    if not is_manager_privacy_policy_confirmed(bot_user_id=bot_user_id):
         await send_message_to_user(update, context, text=MISSING_PRIVACY_POLICY_CONFIRMATION_TEXT)
         return
 
@@ -753,7 +753,7 @@ async def ask_to_record_video_command(update: Update, context: ContextTypes.DEFA
 
     # ----- CHECK MUST CONDITIONS are met and STOP if not -----
 
-    if not is_privacy_policy_confirmed(bot_user_id=bot_user_id):
+    if not is_manager_privacy_policy_confirmed(bot_user_id=bot_user_id):
         await send_message_to_user(update, context, text=MISSING_PRIVACY_POLICY_CONFIRMATION_TEXT)
         return
 
@@ -1004,7 +1004,7 @@ async def select_vacancy_command(update: Update, context: ContextTypes.DEFAULT_T
 
         # ----- CHECK IF Privacy confirmed and VACANCY is selected and STOP if it is -----
 
-        if not is_privacy_policy_confirmed(bot_user_id=bot_user_id):
+        if not is_manager_privacy_policy_confirmed(bot_user_id=bot_user_id):
             await send_message_to_user(update, context, text=MISSING_PRIVACY_POLICY_CONFIRMATION_TEXT)
             return
 
@@ -1586,7 +1586,7 @@ async def send_message_to_applicant_command(bot_user_id: str, resume_id: str) ->
     # ----- UPDATE RESUME_RECORDS file with new status of request to shoot resume video -----
 
     new_status_of_request_to_shoot_resume_video = "yes"
-    update_resume_record_with_top_level_key(bot_user_id=bot_user_id, vacancy_id=target_vacancy_id, resume_record_id=resume_id, key="is_request_to_shoot_resume_video_sent", value=new_status_of_request_to_shoot_resume_video)
+    update_resume_record_with_top_level_key(bot_user_id=bot_user_id, vacancy_id=target_vacancy_id, resume_record_id=resume_id, key="request_to_shoot_resume_video_sent", value=new_status_of_request_to_shoot_resume_video)
 
 
 async def change_employer_state_command(bot_user_id: str, resume_id: str) -> None:
@@ -1635,7 +1635,7 @@ async def updated_resume_records_with_fresh_video_from_applicants_command(bot_us
             # If video not recorded, update list and update resume records
             if not is_applicant_video_recorded(bot_user_id=bot_user_id, vacancy_id=vacancy_id, resume_id=resume_id):
                 fresh_videos_list.append(resume_id)
-                update_resume_record_with_top_level_key(bot_user_id=bot_user_id, vacancy_id=vacancy_id, resume_record_id=resume_id, key="is_resume_video_received", value="yes")
+                update_resume_record_with_top_level_key(bot_user_id=bot_user_id, vacancy_id=vacancy_id, resume_record_id=resume_id, key="resume_video_received", value="yes")
                 update_resume_record_with_top_level_key(bot_user_id=bot_user_id, vacancy_id=vacancy_id, resume_record_id=resume_id, key="resume_video_path", value=video_path)
         
         logger.debug(f"{len(fresh_videos_list)} fresh videos have been found and updated in resume records")
@@ -1827,7 +1827,7 @@ async def handle_invite_to_interview_button(update: Update, context: ContextType
 async def user_status(bot_user_id: str) -> dict:
     status_dict = {}
     status_dict["bot_authorization"] = is_user_in_records(record_id=bot_user_id)
-    status_dict["privacy_policy_confirmation"] = is_privacy_policy_confirmed(bot_user_id=bot_user_id)
+    status_dict["privacy_policy_confirmation"] = is_manager_privacy_policy_confirmed(bot_user_id=bot_user_id)
     status_dict["hh_authorization"] = is_user_authorized(record_id=bot_user_id)
     status_dict["vacancy_selection"] = is_vacancy_selected(record_id=bot_user_id)
     status_dict["welcome_video_recording"] = is_welcome_video_recorded(record_id=bot_user_id)
