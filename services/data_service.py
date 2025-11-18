@@ -132,8 +132,8 @@ def create_record_for_new_user_in_records(record_id: str) -> None:
         "access_token_expires_at": "",
         "data_from_hh": {},
         "vacancy_selected": "no",
-        "vacancy_name": "",
         "vacancy_id": "",
+        "vacancy_name": "",
         "vacancy_video_record_agreed": "no",
         "vacancy_video_sending_confirmed": "",
         "vacancy_video_received": "no",
@@ -163,30 +163,23 @@ def create_record_for_new_resume_id_in_resume_records(bot_user_id: str, vacancy_
     
     # Convert user_id to string since JSON keys are always strings
     resume_record_id_str = str(resume_record_id)
-    
+    vacancy_name = get_target_vacancy_name_from_records(record_id=bot_user_id)
+
     if resume_record_id not in resume_records:
         resume_records[resume_record_id_str] = {
             "manager_bot_user_id": bot_user_id,
             "vacancy_id": vacancy_id,
+            "vacancy_name": vacancy_name,
             "negotiation_id": "",
             "resume_id": resume_record_id,
             "first_name": "",
             "last_name": "",
             "phone": "",
             "email": "",
+            "hh_email": "",
             "ai_analysis": {},
             "resume_sorting_status": "new",
             "request_to_shoot_resume_video_sent": "no",
-            "applicant_bot_visited": "no", # updated from applicant bot
-            "tg_user_id": "",  # updated from applicant bot
-            "tg_user_name": "",  # updated from applicant bot
-            "tg_user_username": "",  # updated from applicant bot
-            "tg_user_first_name": "",  # updated from applicant bot
-            "tg_user_last_name": "",  # updated from applicant bot
-            "privacy_policy_confirmed": "no",  # updated from applicant bot
-            "privacy_policy_confirmation_time": "",  # updated from applicant bot
-            "welcome_video_shown": "no",  # updated from applicant bot
-            "agreed_to_record_resume_video": "no",  # updated from applicant bot
             "resume_video_received": "no",
             "resume_video_path": "",
             "is_resume_accepted_by_manager": "no"
