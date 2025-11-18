@@ -166,7 +166,10 @@ def create_record_for_new_resume_id_in_resume_records(bot_user_id: str, vacancy_
     
     if resume_record_id not in resume_records:
         resume_records[resume_record_id_str] = {
+            "manager_bot_user_id": bot_user_id,
+            "vacancy_id": vacancy_id,
             "negotiation_id": "",
+            "resume_id": resume_record_id,
             "first_name": "",
             "last_name": "",
             "phone": "",
@@ -175,7 +178,11 @@ def create_record_for_new_resume_id_in_resume_records(bot_user_id: str, vacancy_
             "resume_sorting_status": "new",
             "request_to_shoot_resume_video_sent": "no",
             "applicant_bot_visited": "no", # updated from applicant bot
-            "data_from_telegram": {},  # updated from applicant bot
+            "tg_user_id": "",  # updated from applicant bot
+            "tg_user_name": "",  # updated from applicant bot
+            "tg_user_username": "",  # updated from applicant bot
+            "tg_user_first_name": "",  # updated from applicant bot
+            "tg_user_last_name": "",  # updated from applicant bot
             "privacy_policy_confirmed": "no",  # updated from applicant bot
             "privacy_policy_confirmation_time": "",  # updated from applicant bot
             "welcome_video_shown": "no",  # updated from applicant bot

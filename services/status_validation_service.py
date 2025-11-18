@@ -29,7 +29,7 @@ def is_user_in_records(record_id: str) -> bool:
         return False
 
 
-def is_privacy_policy_confirmed(bot_user_id: str) -> bool:
+def is_manager_privacy_policy_confirmed(bot_user_id: str) -> bool:
     # TAGS: [status_validation]
     """Check if privacy policy is confirmed."""
     users_records_file_path = get_users_records_file_path()
@@ -217,7 +217,7 @@ def is_applicant_video_recorded(bot_user_id: str, vacancy_id: str, resume_id: st
     with open(resume_records_file_path, "r", encoding="utf-8") as f:
         resume_records = json.load(f)
     if resume_id in resume_records:
-        return resume_records[resume_id]["is_resume_video_received"] == "yes"
+        return resume_records[resume_id]["resume_video_received"] == "yes"
     else:
         logger.debug(f"'resume_id': {resume_id} is not found in {resume_records_file_path}")
         return False
