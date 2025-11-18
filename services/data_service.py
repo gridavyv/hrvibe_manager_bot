@@ -51,17 +51,8 @@ def create_vacancy_directory(bot_user_id: str, vacancy_id: str) -> Path:
     vacancy_data_dir = user_data_dir / f"vacancy_id_{vacancy_id}"
     if vacancy_data_dir.mkdir(exist_ok=True):
         logger.debug(f"{vacancy_data_dir} created.")
-
-        # ----- CREATE SUBDIRECTORIES and FILES -----
-
-        # Create subdirectories for video
         create_custom_directory(parent_directory=vacancy_data_dir, new_directory_name="video_from_managers")
         create_custom_directory(parent_directory=vacancy_data_dir, new_directory_name="video_from_applicants")
-        # Create empty JSON file for applicant bot records
-        applicant_bot_records_file_path = vacancy_data_dir / "applicant_bot_records.json"
-        if not applicant_bot_records_file_path.exists():
-            applicant_bot_records_file_path.write_text(json.dumps({}), encoding="utf-8")
-            logger.debug(f"{applicant_bot_records_file_path} created.")
         return vacancy_data_dir
     else:
         logger.debug(f"{vacancy_data_dir} already exists.")
