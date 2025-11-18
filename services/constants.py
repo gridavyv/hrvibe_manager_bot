@@ -5,11 +5,9 @@ RESUME_PASSED_SCORE = 6
 VACANCY_STATUS_TO_FILTER = "open"
 
 
-AVAILABLE_EMPLOYER_STATES_COLLECTION_STATUS = ["response", "consider", "phone_interview", "interview", "offer", "hired"]
 TARGET_EMPLOYER_STATE_COLLECTION_STATUS = "response"
 NEW_EMPLOYER_STATE_COLLECTION_STATUS = "consider"
 
-VACANCY_LIST = [('126323420', 'Вакансия 1'), ('9876543210', 'Вакансия 2')]
 
 # ----- MENU BUTTONS CONSTANTS -----
 
@@ -21,14 +19,10 @@ BASE_URL = "https://hrvibe-hh-callback-endpoint.onrender.com"
 
 # ----- VIDEO DIRECTORIES CONSTANTS -----
 
-SOURCING_VIDEO_DATA_DIR = ""
 
 BOT_FOR_APPLICANTS_USERNAME="MeetYourManagerBot"
 
-
 CALLBACK_ENDPOINT_RESPONSE_WHEN_RECORDS_NOT_READY = {'detail': 'State not ready or not found'}
-
-
 
 
 INSTRUCTIONS_TO_SHOOT_VIDEO_TEXT = (
@@ -41,7 +35,6 @@ INSTRUCTIONS_TO_SHOOT_VIDEO_TEXT = (
 VIDEO_SENDING_CONFIRMATION_TEXT = (
     "Готовы отправить это видео кандидатам или хотите записать другое?"
 )
-
 
 # ----- DATA SERVICE CONSTANTS -----
 

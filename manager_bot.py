@@ -1572,7 +1572,7 @@ async def send_message_to_applicant_command(bot_user_id: str, resume_id: str) ->
     # Get negotiation ID from resume record
     negotiation_id = get_negotiation_id_from_resume_record(bot_user_id=bot_user_id, vacancy_id=target_vacancy_id, resume_record_id=resume_id)
     # Create Telegram bot link for applicant
-    tg_link = create_tg_bot_link_for_applicant(vacancy_id=target_vacancy_id, resume_id=resume_id)
+    tg_link = create_tg_bot_link_for_applicant(bot_user_id=bot_user_id, vacancy_id=target_vacancy_id, resume_id=resume_id)
     negotiation_message_text = APPLICANT_MESSAGE_TEXT_WITHOUT_LINK + f"{tg_link}"
     logger.debug(f"Sending message to applicant for negotiation ID: {negotiation_id}")
     try:
