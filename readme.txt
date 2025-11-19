@@ -18,8 +18,6 @@ employer_state = «ярлык стадии» отдельного диалога
 ищем внутри коллекций
 Коллекция ≈ объединение переговоров с определёнными employer_state и дополнительными условиями (прочитанность, актуальность, закрыт/архив и пр.).
 
-
-
  When pulling negotiations for a vacancy from HH.ru
  there are multiple "collection" types:
 "response" - To fetch new applicant applications

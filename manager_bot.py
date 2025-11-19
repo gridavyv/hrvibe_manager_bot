@@ -50,19 +50,14 @@ from services.status_validation_service import (
 
 from services.data_service import (
     get_directory_for_video_from_applicants,
-    get_applicant_video_directory,
-    create_custom_directory,
     format_oauth_link_text,
-    get_data_directory,
     create_resume_records_file,
     get_resume_records_file_path,
     get_path_to_video_from_applicant_from_resume_records,
     get_tg_user_data_attribute_from_update_object,
-    create_data_directory,
     create_oauth_link,
     get_decision_status_from_selected_callback_code,
     update_user_records_with_top_level_key,
-    create_users_records_file, 
     create_user_directory, 
     create_vacancy_directory,
     get_vacancy_directory,
@@ -78,13 +73,10 @@ from services.data_service import (
     create_json_file_with_dictionary_content,
     get_target_vacancy_id_from_records,
     get_target_vacancy_name_from_records,
-    get_reply_from_update_object,
     get_list_of_passed_resume_ids_with_video,
-    get_list_of_passed_resume_ids_no_video,
     get_negotiation_id_from_resume_record,
     get_users_records_file_path,
     create_tg_bot_link_for_applicant,
-    get_applicants_video_directory,
 )
 from services.auth_service import (
     get_token_by_state,
@@ -97,13 +89,9 @@ from services.hh_service import (
     get_employer_vacancies_from_hh,
     filter_open_employer_vacancies,
     get_vacancy_description_from_hh,
-    get_available_employer_states_and_collections_negotiations,
     get_negotiations_by_collection,
-    get_negotiations_by_state,
-    get_negotiations_messages,
     change_collection_status_of_negotiation,
     send_negotiation_message,
-    get_negotiations_history,
     get_resume_info,
 )
 from services.ai_service import (
@@ -1629,8 +1617,9 @@ async def updated_resume_records_with_fresh_video_from_applicants_command(bot_us
         
         for video_path in all_video_paths_list:
             # Parse video path to get resume ID. Video shall have the following structure: 
-              # applicant_{user_id}_vacancy_{target_vacancy_id}_resume_{resume_id}_time_{timestamp}_note.mp4
-            resume_id = video_path.stem.split("_")[5]
+            # - type #1: applicant_{applicant_user_id}_resume_{resume_id}_time_{timestamp}_note.mp4
+            # - type #2: - applicant_{applicant_user_id}_resume_{resume_id}_time_{timestamp}.mp4
+            resume_id = video_path.stem.split("_")[3]
             logger.debug(f"Checking if applicant video is recorded. Video path: {video_path} / Resume ID: {resume_id}")
             # If video not recorded, update list and update resume records
             if not is_applicant_video_recorded(bot_user_id=bot_user_id, vacancy_id=vacancy_id, resume_id=resume_id):
