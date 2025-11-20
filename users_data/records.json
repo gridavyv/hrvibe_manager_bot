@@ -1,0 +1,31 @@
+{
+  "8481838168": {
+    "id": "8481838168",
+    "username": "da_express_moscow",
+    "first_name": "Da-express",
+    "last_name": null,
+    "first_time_seen": "2025-11-20T08:55:49.461733+00:00",
+    "privacy_policy_confirmed": "no",
+    "privacy_policy_confirmation_time": "",
+    "access_token_recieved": "no",
+    "access_token": "",
+    "access_token_expires_at": "",
+    "data_from_hh": {},
+    "vacancy_selected": "no",
+    "vacancy_id": "",
+    "vacancy_name": "",
+    "vacancy_video_record_agreed": "no",
+    "vacancy_video_sending_confirmed": "",
+    "vacancy_video_received": "no",
+    "vacancy_video_path": "",
+    "vacancy_description_recieved": "no",
+    "vacancy_sourcing_criterias_recieved": "no",
+    "vacancy_negotiation_collection_recieved": "no",
+    "messages_with_keyboards": [
+      [
+        8481838168,
+        1157
+      ]
+    ]
+  }
+}
